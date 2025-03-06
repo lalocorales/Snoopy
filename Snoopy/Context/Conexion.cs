@@ -9,7 +9,7 @@ namespace Snoopy.Context
 {
     public class Conexion
     {
-        private string connectionString = "Server=CORRALES;Database=PeanutsDB;User ID=AlumnnosUNINTER;Password=Uninter2025;Integrated Security=False;MultipleActiveResultSets=True;TrustServerCertificate=True;";
+        private string connectionString = "Server=CORRALES;Database=PeanutsDB;User ID=AlumnosUNINTER;Password=Uninter2025;Integrated Security=False;MultipleActiveResultSets=True;TrustServerCertificate=True;";
 
         public SqlConnection GetConnection()
         {
