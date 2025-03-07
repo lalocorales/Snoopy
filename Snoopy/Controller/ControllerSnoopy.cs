@@ -32,14 +32,15 @@ namespace Snoopy.Controller
                         {
                             personajes.Add(new SnoopyModel
                             {
-                                ID = Convert.ToInt32(reader["ID"]),
-                                Nombre = reader["Nombre"].ToString(),
-                                Apodo = reader["Apodo"].ToString(),
-                                Raza = reader["Raza"].ToString(),
-                                Dueño = reader["Dueño"].ToString(),
-                                Personalidad = reader["Personalidad"].ToString(),
-                                PrimeraAparicion = Convert.ToDateTime(reader["PrimeraAparicion"]),
-                                ImagenURL = reader["ImagenURL"].ToString()
+                                ID = reader["ID"] != DBNull.Value ? Convert.ToInt32(reader["ID"]) : 0, // Si es null, asigna 0
+                                Nombre = reader["Nombre"] != DBNull.Value ? reader["Nombre"].ToString() : null,
+                                Apodo = reader["Apodo"] != DBNull.Value ? reader["Apodo"].ToString() : null,
+                                Raza = reader["Raza"] != DBNull.Value ? reader["Raza"].ToString() : null,
+                                Dueño = reader["Dueño"] != DBNull.Value ? reader["Dueño"].ToString() : null,
+                                Personalidad = reader["Personalidad"] != DBNull.Value ? reader["Personalidad"].ToString() : null,
+                                PrimeraAparicion = reader["PrimeraAparicion"] != DBNull.Value ? Convert.ToDateTime(reader["PrimeraAparicion"]) : (DateTime?)null,
+                                ImagenURL = reader["ImagenURL"] != DBNull.Value ? reader["ImagenURL"].ToString() : null
+
                             });
                         }
                     }

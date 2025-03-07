@@ -10,7 +10,7 @@ namespace Snoopy.Model
         public string? Raza { get; set; }
         public string? Dueño { get; set; }
         public string? Personalidad { get; set; }
-        public DateTime PrimeraAparicion { get; set; }
+        public DateTime? PrimeraAparicion { get; set; }
         public string? ImagenURL { get; set; }
     }
 }
