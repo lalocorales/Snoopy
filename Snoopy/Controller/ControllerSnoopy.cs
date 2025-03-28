@@ -53,5 +53,88 @@ namespace Snoopy.Controller
 
             return personajes;
         }
+
+
+        // CREATE - Insertar un nuevo personaje
+        public void InsertarPersonaje(SnoopyModel personaje)
+        {
+            using (SqlConnection conn = conexion.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    string query = @"INSERT INTO Personajes (Nombre, Apodo, Raza, Dueño, Personalidad, PrimeraAparicion, ImagenURL)
+                                     VALUES (@Nombre, @Apodo, @Raza, @Dueño, @Personalidad, @PrimeraAparicion, @ImagenURL)";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@Nombre", personaje.Nombre ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Apodo", personaje.Apodo ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Raza", personaje.Raza ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Dueño", personaje.Dueño ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Personalidad", personaje.Personalidad ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@PrimeraAparicion", personaje.PrimeraAparicion ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ImagenURL", personaje.ImagenURL ?? (object)DBNull.Value);
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al insertar el personaje: " + ex.Message);
+                }
+            }
+        }
+
+        // UPDATE - Modificar un personaje existente
+        public void ActualizarPersonaje(SnoopyModel personaje)
+        {
+            using (SqlConnection conn = conexion.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    string query = @"UPDATE Personajes 
+                                     SET Nombre = @Nombre, Apodo = @Apodo, Raza = @Raza, Dueño = @Dueño, 
+                                         Personalidad = @Personalidad, PrimeraAparicion = @PrimeraAparicion, ImagenURL = @ImagenURL
+                                     WHERE ID = @ID";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", personaje.ID);
+                    cmd.Parameters.AddWithValue("@Nombre", personaje.Nombre ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Apodo", personaje.Apodo ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Raza", personaje.Raza ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Dueño", personaje.Dueño ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Personalidad", personaje.Personalidad ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@PrimeraAparicion", personaje.PrimeraAparicion ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ImagenURL", personaje.ImagenURL ?? (object)DBNull.Value);
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al actualizar el personaje: " + ex.Message);
+                }
+            }
+        }
+
+        // DELETE - Eliminar un personaje por ID
+        public void EliminarPersonaje(int id)
+        {
+            using (SqlConnection conn = conexion.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "DELETE FROM Personajes WHERE ID = @ID";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al eliminar el personaje: " + ex.Message);
+                }
+            }
+        }
     }
 }
+
